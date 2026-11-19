@@ -3,7 +3,7 @@
   "source": "https://github.com/emkay-voice/ovos-skill-nato-alphabet",
   "package_name": "ovos-skill-nato-alphabet",
   "pip_spec": "ovos-skill-nato-alphabet",
-  "license": "GPL-3.0-or-later",
+  "license": "Apache-2.0",
   "author": "emkay-voice",
   "name": "NATO Alphabet",
   "description": "Spells a word using the NATO/ICAO phonetic alphabet - Alfa, Bravo, Charlie. Fully offline, pure lookup table.",
