@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ovos-skill-nato-alphabet"
+version = "0.2.0a1"
+description = "Spells a word using the NATO/ICAO phonetic alphabet - Alfa, Bravo, Charlie. Fully offline, pure lookup table."
+readme = "README.md"
+license = {text = "GPL-3.0-or-later"}
+authors = [{name = "Andreas Lorensen"}]
+requires-python = ">=3.10"
+keywords = ["ovos", "openvoiceos", "skill", "voice", "assistant", "spelling", "nato", "phonetic", "alphabet", "utility", "emkay"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Intended Audience :: End Users/Desktop",
+    "Programming Language :: Python :: 3",
+    "Topic :: Multimedia :: Sound/Audio :: Speech",
+]
+dependencies = [
+    "ovos-workshop>=0.0.15,<10.0.0",
+]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[project.urls]
+Homepage = "https://github.com/emkay-voice/ovos-skill-nato-alphabet"
+Issues = "https://github.com/emkay-voice/ovos-skill-nato-alphabet/issues"
+Emkay = "https://github.com/emkay-voice/emkay"
+Icon = "https://raw.githubusercontent.com/emkay-voice/ovos-skill-nato-alphabet/main/icon.png"
+
+[project.entry-points."opm.skill"]
+"ovos-skill-nato-alphabet.emkay-voice" = "ovos_skill_nato_alphabet:NatoAlphabet"
+
+[tool.setuptools]
+packages = ["ovos_skill_nato_alphabet"]
+
+[tool.setuptools.package-dir]
+ovos_skill_nato_alphabet = ""
+
+[tool.setuptools.package-data]
+ovos_skill_nato_alphabet = ["locale/**/*", "*.png"]

@@ -1,10 +1,10 @@
 {
-  "skill_id": "ovos-skill-nato-alphabet.andlo",
-  "source": "https://github.com/andlo/ovos-skill-nato-alphabet",
+  "skill_id": "ovos-skill-nato-alphabet.emkay-voice",
+  "source": "https://github.com/emkay-voice/ovos-skill-nato-alphabet",
   "package_name": "ovos-skill-nato-alphabet",
   "pip_spec": "ovos-skill-nato-alphabet",
   "license": "GPL-3.0-or-later",
-  "author": "andlo",
+  "author": "emkay-voice",
   "name": "NATO Alfabetet",
   "description": "Staver et ord med det NATO/ICAO fonetiske alfabet - Alfa, Bravo, Charlie. Fuldstændig offline, ren opslagstabel.",
   "examples": [
@@ -17,5 +17,5 @@
     "fonetisk alfabet",
     "utility"
   ],
-  "icon": "https://raw.githubusercontent.com/andlo/ovos-skill-nato-alphabet/main/icon.png"
+  "icon": "https://raw.githubusercontent.com/emkay-voice/ovos-skill-nato-alphabet/main/icon.png"
 }

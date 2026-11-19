@@ -6,7 +6,10 @@ practical for dictating serial numbers, emails, or names over the
 phone. Pure text-to-table lookup, zero ambiguity, no external
 dependencies at all.
 
-[![Tests](https://github.com/andlo/ovos-skill-nato-alphabet/actions/workflows/test.yml/badge.svg)](https://github.com/andlo/ovos-skill-nato-alphabet/actions/workflows/test.yml)
+It is part of [Emkay](https://github.com/emkay-voice/emkay), OpenVoiceOS in
+the browser, and works on any [OpenVoiceOS](https://openvoiceos.org).
+
+[![Build](https://github.com/emkay-voice/ovos-skill-nato-alphabet/actions/workflows/publish.yml/badge.svg)](https://github.com/emkay-voice/ovos-skill-nato-alphabet/actions/workflows/publish.yml)
 [![PyPI version](https://img.shields.io/pypi/v/ovos-skill-nato-alphabet.svg)](https://pypi.org/project/ovos-skill-nato-alphabet/)
 
 ## Usage
