@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ovos-skill-nato-alphabet"
-version = "0.2.0a1"
+version = "0.2.0"
 description = "Spells a word using the NATO/ICAO phonetic alphabet - Alfa, Bravo, Charlie. Fully offline, pure lookup table."
 readme = "README.md"
 license = {text = "Apache-2.0"}
