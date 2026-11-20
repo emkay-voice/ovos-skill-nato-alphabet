@@ -23,7 +23,19 @@ as their plain number word in the device's language (not a separate
 "aviation numeral" pronunciation like "niner" for 9 - that's a
 different, narrower radiotelephony convention this skill doesn't
 attempt to replicate).
+
+ON A SCREEN
+-----------
+On a device with a GUI the spelling is shown as the stock SYSTEM_grid
+template: one round tile per letter with the letter big inside it and
+its code word underneath (a big E over "Echo"). The letter is a small
+SVG sent as a data: URI, so nothing is shipped or fetched, and any
+GUI that implements the OVOS GUI templates can show it. It stays up
+for SCREEN_SECONDS so it can be copied down.
 """
+
+import base64
+from html import escape
 
 from ovos_workshop.skills import OVOSSkill
 from ovos_workshop.decorators import intent_handler
@@ -51,25 +63,49 @@ DIGIT_WORDS = {
 }
 
 
+# how long the spelling stays on screen after it is shown
+SCREEN_SECONDS = 60
+
+
+def letter_tile(char):
+    """A big white letter centred in a square, as a data: URI for a
+    SYSTEM_grid tile (the GUI draws the round tile around it)."""
+    svg = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">'
+           '<text x="100" y="154" text-anchor="middle" font-family="sans-serif" '
+           f'font-weight="bold" font-size="150" fill="#ffffff">{escape(char)}</text></svg>')
+    return "data:image/svg+xml;base64," + base64.b64encode(svg.encode("utf-8")).decode("ascii")
+
+
 class NatoAlphabet(OVOSSkill):
 
     def _digit_words_for(self, lang):
         lang = lang.lower()
         return DIGIT_WORDS.get(lang) or DIGIT_WORDS.get("en-us", {})
 
-    def _spell(self, text, lang):
-        """Returns a list of NATO words / digit words for each
-        letter/digit in `text`, skipping anything else (spaces,
-        punctuation) rather than trying to announce them."""
+    def _spell_pairs(self, text, lang):
+        """(character, word) for each letter/digit in `text`, skipping
+        anything else (spaces, punctuation) rather than trying to
+        announce them."""
         digit_words = self._digit_words_for(lang)
-        words = []
+        pairs = []
         for char in text:
             lower = char.lower()
             if lower in NATO_WORDS:
-                words.append(NATO_WORDS[lower])
+                pairs.append((char.upper(), NATO_WORDS[lower]))
             elif lower in digit_words:
-                words.append(digit_words[lower])
-        return words
+                pairs.append((char, digit_words[lower]))
+        return pairs
+
+    def _spell(self, text, lang):
+        """The NATO words / digit words for `text`."""
+        return [word for _, word in self._spell_pairs(text, lang)]
+
+    def _show_spelling(self, text, pairs):
+        """The word as the title, a tile per letter with its code word."""
+        self.gui["title"] = text
+        self.gui["items"] = [{"image": letter_tile(char), "title": word}
+                             for char, word in pairs]
+        self.gui.show_page("SYSTEM_grid", override_idle=SCREEN_SECONDS)
 
     @intent_handler("spell_word.intent")
     def handle_spell_word(self, message):
@@ -77,8 +113,9 @@ class NatoAlphabet(OVOSSkill):
         if not text:
             self.speak_dialog("nothing_to_spell")
             return
-        words = self._spell(text, self.lang)
-        if not words:
+        pairs = self._spell_pairs(text, self.lang)
+        if not pairs:
             self.speak_dialog("nothing_spellable", {"word": text})
             return
-        self.speak_dialog("spelled_word", {"spelled": ", ".join(words)})
+        self._show_spelling(text, pairs)
+        self.speak_dialog("spelled_word", {"spelled": ", ".join(word for _, word in pairs)})
