@@ -25,4 +25,5 @@ def skill(monkeypatch):
     monkeypatch.setattr(NatoAlphabet, "lang", "en-us", raising=False)
     s.res_dir = str(Path(__file__).resolve().parents[1])
     s._lang_resources = {}
+    s.gui = MagicMock()
     return s

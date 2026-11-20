@@ -54,6 +54,10 @@ announced or causing an error. "stav Søren" spells S, R, E, N and
 skips the ø. Not fixed here - there's no standard answer for how to
 phonetically spell a letter the standard was never designed to cover.
 
+## On a screen
+
+On a device with a screen (Emkay, a Mark II, any OVOS GUI) the spelling is shown as well: the word at the top and a round tile per letter, the letter big inside it and its code word underneath, a big **E** over *Echo*. It stays up for a minute so you can copy it down. It uses the stock `SYSTEM_grid` template with the letters drawn as small SVGs, so nothing is downloaded and any GUI that has the OVOS templates can show it.
+
 ## Install
 ```bash
 pip install ovos-skill-nato-alphabet
